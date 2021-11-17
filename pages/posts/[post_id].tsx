@@ -3,7 +3,7 @@ import { GetStaticProps, GetStaticPaths } from "next";
 import Head from "next/head";
 import Post from "../../src/interfaces/Post.interface";
 
-const EachPost = ({ post }) => {
+const EachPost = ({ post }: { post: any }) => {
   return (
     <div>
       <Head>

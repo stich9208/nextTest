@@ -4,7 +4,7 @@ import Head from "next/head";
 import Link from "next/link";
 import Post from "../../src/interfaces/Post.interface";
 
-const Posts = ({ posts }) => {
+const Posts = ({ posts }: { posts: any }) => {
   return (
     <div>
       <Head>
