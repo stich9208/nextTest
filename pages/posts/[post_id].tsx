@@ -11,13 +11,35 @@ const EachPost = ({ post }: { post: any }) => {
         <meta name="post" content="each Post" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <title>
-          <h1>{post.title}</h1>
-        </title>
-        <br />
-        <section>
-          <p>{post.body}</p>
+      <main
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          width: "100%",
+        }}
+      >
+        <section
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            width: "50%",
+          }}
+        >
+          <h2>{post.title}</h2>
+          <br />
+          <article style={{ width: "70%" }}>
+            <p
+              style={{
+                textAlign: "center",
+                fontSize: "17px",
+                lineHeight: "25px",
+              }}
+            >
+              {post.body}
+            </p>
+          </article>
         </section>
       </main>
     </div>

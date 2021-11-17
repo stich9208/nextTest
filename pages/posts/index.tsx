@@ -13,15 +13,23 @@ const Posts = ({ posts }: { posts: any }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <ul>
+        <ol>
           {posts.map((post: Post) => (
-            <li key={post.id}>
+            <li
+              key={post.id}
+              style={{
+                marginLeft: "20px",
+                marginBottom: "20px",
+                padding: "10px",
+                fontSize: "25px",
+              }}
+            >
               <Link href={`/posts/${post.id}`}>
-                <a>{post.title}</a>
+                <a style={{ borderBottom: "1px solid black" }}>{post.title}</a>
               </Link>
             </li>
           ))}
-        </ul>
+        </ol>
       </main>
     </div>
   );
