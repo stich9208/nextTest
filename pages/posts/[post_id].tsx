@@ -1,6 +1,7 @@
 import React from "react";
-import { GetStaticProps } from "next";
+import { GetStaticProps, GetStaticPaths } from "next";
 import Head from "next/head";
+import Post from "../../src/interfaces/Post.interface";
 
 const EachPost = ({ post }) => {
   return (
@@ -23,11 +24,22 @@ const EachPost = ({ post }) => {
   );
 };
 
+export const getStaticPaths: GetStaticPaths = async (): Promise<any> => {
+  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+  const posts = await res.json();
+  const paths = posts.map((post: Post) => ({
+    params: {
+      post_id: JSON.stringify(post.id),
+    },
+  }));
+  return { paths, fallback: false };
+};
+
 export const getStaticProps: GetStaticProps = async ({
   params,
 }): Promise<any> => {
   const res = await fetch(
-    `https://jsonplaceholder.typicode.com/posts/${params.id}`
+    `https://jsonplaceholder.typicode.com/posts/${params.post_id}`
   );
   const post = await res.json();
 
