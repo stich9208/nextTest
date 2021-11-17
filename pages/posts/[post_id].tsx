@@ -39,7 +39,7 @@ export const getStaticProps: GetStaticProps = async ({
   params,
 }): Promise<any> => {
   const res = await fetch(
-    `https://jsonplaceholder.typicode.com/posts/${params.post_id}`
+    `https://jsonplaceholder.typicode.com/posts/${params?.post_id}`
   );
   const post = await res.json();
 
