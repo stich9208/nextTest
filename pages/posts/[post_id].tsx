@@ -27,7 +27,7 @@ const EachPost = ({ post }: { post: any }) => {
             width: "50%",
           }}
         >
-          <h2>{post.title}</h2>
+          <h2 style={{ textAlign: "center" }}>{post.title}</h2>
           <br />
           <article style={{ width: "70%" }}>
             <p
@@ -48,13 +48,14 @@ const EachPost = ({ post }: { post: any }) => {
 
 export const getStaticPaths: GetStaticPaths = async (): Promise<any> => {
   const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+  // const res = await fetch("http://localhost:3000/data/data.json");
   const posts = await res.json();
   const paths = posts.map((post: Post) => ({
     params: {
       post_id: JSON.stringify(post.id),
     },
   }));
-  return { paths, fallback: false };
+  return { paths, fallback: "blocking" };
 };
 
 export const getStaticProps: GetStaticProps = async ({
@@ -63,6 +64,9 @@ export const getStaticProps: GetStaticProps = async ({
   const res = await fetch(
     `https://jsonplaceholder.typicode.com/posts/${params?.post_id}`
   );
+  // const res = await fetch(
+  //   `http://localhost:3000/data/data.json/${params?.post_id}`
+  // );
   const post = await res.json();
 
   return { props: { post } };
