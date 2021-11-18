@@ -6,7 +6,7 @@ import Post from "../../src/interfaces/Post.interface";
 
 const Posts = ({ posts }: { posts: any }) => {
   return (
-    <div>
+    <div style={{ paddingTop: "20px" }}>
       <Head>
         <title>postList</title>
         <meta name="posts/ssg" content="all Posts" />
@@ -17,13 +17,25 @@ const Posts = ({ posts }: { posts: any }) => {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          marginTop: "20px",
         }}
       >
-        <span style={{ marginLeft: "100px" }}>Static Generation</span>
+        <span
+          style={{
+            marginLeft: "100px",
+            fontSize: "30px",
+            fontWeight: "bold",
+          }}
+        >
+          Static Generation
+        </span>
         <Link href="/ssr" passHref>
           <button
-            style={{ marginRight: "20%", width: "100px", height: "50px" }}
+            style={{
+              marginRight: "20%",
+              width: "100px",
+              height: "40px",
+              cursor: "pointer",
+            }}
           >
             Go to SSR
           </button>

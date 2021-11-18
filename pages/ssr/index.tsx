@@ -6,7 +6,7 @@ import Post from "../../src/interfaces/Post.interface";
 
 const Ssr = ({ posts }: { posts: any }) => {
   return (
-    <div>
+    <div style={{ paddingTop: "20px", backgroundColor: "black" }}>
       <Head>
         <title>postList</title>
         <meta name="posts/ssr" content="all Posts" />
@@ -17,21 +17,29 @@ const Ssr = ({ posts }: { posts: any }) => {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          marginTop: "20px",
-          backgroundColor: "black",
           color: "white",
         }}
       >
-        <span style={{ marginLeft: "100px" }}>Server Side Rendering</span>
+        <span
+          style={{ marginLeft: "100px", fontSize: "30px", fontWeight: "bold" }}
+        >
+          Server Side Rendering
+        </span>
         <Link href="/posts" passHref>
           <button
-            style={{ marginRight: "20%", width: "100px", height: "50px" }}
+            style={{
+              marginRight: "20%",
+              width: "100px",
+              height: "40px",
+              borderColor: "white",
+              cursor: "pointer",
+            }}
           >
             Go to SSG
           </button>
         </Link>
       </header>
-      <main style={{ backgroundColor: "black" }}>
+      <main>
         <ol style={{ color: "white" }}>
           {posts.map((post: Post) => (
             <li
