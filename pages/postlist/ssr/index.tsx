@@ -2,7 +2,7 @@ import React from "react";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import Post from "../../src/interfaces/Post.interface";
+import Post from "../../../src/interfaces/Post.interface";
 
 const Ssr = ({ posts }: { posts: Post[] }) => {
   return (
@@ -17,21 +17,28 @@ const Ssr = ({ posts }: { posts: Post[] }) => {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          marginBottom: "50px",
           color: "white",
         }}
       >
         <span
-          style={{ marginLeft: "100px", fontSize: "30px", fontWeight: "bold" }}
+          style={{
+            marginLeft: "20px",
+            fontSize: "30px",
+            fontWeight: "bold",
+          }}
         >
           Server Side Rendering
         </span>
-        <Link href="/posts" passHref>
+        <Link href="/postlist/ssg" passHref>
           <button
+            className="ssr"
             style={{
               marginRight: "20%",
               width: "100px",
               height: "40px",
-              borderColor: "white",
+              fontWeight: "bold",
+              borderRadius: "20px",
               cursor: "pointer",
             }}
           >
@@ -45,13 +52,13 @@ const Ssr = ({ posts }: { posts: Post[] }) => {
             <li
               key={post.id}
               style={{
+                marginTop: "20px",
                 marginLeft: "20px",
-                marginBottom: "20px",
                 padding: "10px",
                 fontSize: "25px",
               }}
             >
-              <Link href={`/ssr/${post.id}`}>
+              <Link href={`/postlist/ssr/${post.id}`}>
                 <a style={{ color: "white", borderBottom: "1px solid white" }}>
                   {post.title}
                 </a>

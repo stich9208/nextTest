@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import Post from "../../src/interfaces/Post.interface";
+import Post from "../../../src/interfaces/Post.interface";
 
 const Posts = ({ posts }: { posts: any }) => {
   return (
@@ -17,23 +17,27 @@ const Posts = ({ posts }: { posts: any }) => {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          marginBottom: "50px",
         }}
       >
         <span
           style={{
-            marginLeft: "100px",
+            marginLeft: "20px",
             fontSize: "30px",
             fontWeight: "bold",
           }}
         >
           Static Generation
         </span>
-        <Link href="/ssr" passHref>
+        <Link href="/postlist/ssr" passHref>
           <button
+            className="ssg"
             style={{
               marginRight: "20%",
               width: "100px",
               height: "40px",
+              fontWeight: "bold",
+              borderRadius: "20px",
               cursor: "pointer",
             }}
           >
@@ -47,13 +51,13 @@ const Posts = ({ posts }: { posts: any }) => {
             <li
               key={post.id}
               style={{
+                marginTop: "20px",
                 marginLeft: "20px",
-                marginBottom: "20px",
                 padding: "10px",
                 fontSize: "25px",
               }}
             >
-              <Link href={`/posts/${post.id}`}>
+              <Link href={`/postlist/ssg/${post.id}`}>
                 <a style={{ borderBottom: "1px solid black" }}>{post.title}</a>
               </Link>
             </li>
