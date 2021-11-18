@@ -1,14 +1,14 @@
 import React from "react";
-import { GetStaticProps, GetStaticPaths } from "next";
+import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Post from "../../src/interfaces/Post.interface";
 
-const EachPost = ({ post }: { post: any }) => {
+const EachPostSsr = ({ post }: { post: Post }) => {
   return (
     <div>
       <Head>
         <title>post</title>
-        <meta name="post" content="each Post" />
+        <meta name="post/ssr" content="each Post" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main
@@ -46,26 +46,18 @@ const EachPost = ({ post }: { post: any }) => {
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async (): Promise<any> => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
-  const posts = await res.json();
-  const paths = posts.map((post: Post) => ({
-    params: {
-      post_id: JSON.stringify(post.id),
-    },
-  }));
-  return { paths, fallback: "blocking" };
-};
-
-export const getStaticProps: GetStaticProps = async ({
-  params,
+export const getServerSideProps: GetServerSideProps = async ({
+  query: { post_id },
 }): Promise<any> => {
   const res = await fetch(
-    `https://jsonplaceholder.typicode.com/posts/${params?.post_id}`
+    `https://jsonplaceholder.typicode.com/posts/${post_id}`
   );
   const post = await res.json();
-
-  return { props: { post } };
+  return {
+    props: {
+      post,
+    },
+  };
 };
 
-export default EachPost;
+export default EachPostSsr;

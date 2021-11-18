@@ -4,7 +4,7 @@ import Head from "next/head";
 import Link from "next/link";
 import Post from "../../src/interfaces/Post.interface";
 
-const Ssr = ({ posts }: { posts: any }) => {
+const Ssr = ({ posts }: { posts: Post[] }) => {
   return (
     <div style={{ paddingTop: "20px", backgroundColor: "black" }}>
       <Head>
@@ -51,7 +51,7 @@ const Ssr = ({ posts }: { posts: any }) => {
                 fontSize: "25px",
               }}
             >
-              <Link href={`/posts/${post.id}`}>
+              <Link href={`/ssr/${post.id}`}>
                 <a style={{ color: "white", borderBottom: "1px solid white" }}>
                   {post.title}
                 </a>
@@ -67,7 +67,6 @@ const Ssr = ({ posts }: { posts: any }) => {
 export const getServerSideProps: GetServerSideProps =
   async (): Promise<any> => {
     const res = await fetch("https://jsonplaceholder.typicode.com/posts");
-    // const res = await fetch("http://localhost:3000/data/data.json");
     const posts = await res.json();
 
     if (!posts)
