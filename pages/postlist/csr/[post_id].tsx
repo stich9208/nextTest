@@ -18,7 +18,7 @@ const EachPostCsr = () => {
       .then((res) => res.json())
       .then((res) => setPost(res))
       .catch((err) => console.log(err));
-  });
+  }, []);
 
   return post ? (
     <div style={{ height: "100vh", backgroundColor: "lightyellow" }}>
