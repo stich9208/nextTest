@@ -1,16 +1,30 @@
-import React from "react";
-import { GetServerSideProps } from "next";
+import React, { useEffect, useState } from "react";
+import { GetStaticProps, GetStaticPaths } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import Post from "../../../src/interfaces/Post.interface";
 import { POST_URL } from "../../../config/util";
 
-const EachPostSsr = ({ post }: { post: Post }) => {
-  return (
-    <div style={{ height: "100vh" }}>
+const EachPostCsr = () => {
+  const [post, setPost] = useState<Post>();
+
+  const {
+    query: { post_id },
+  } = useRouter();
+
+  useEffect(() => {
+    fetch(`${POST_URL}/${post_id}`)
+      .then((res) => res.json())
+      .then((res) => setPost(res))
+      .catch((err) => console.log(err));
+  });
+
+  return post ? (
+    <div style={{ height: "100vh", backgroundColor: "lightyellow" }}>
       <Head>
         <title>post</title>
-        <meta name="post/ssr" content="each Post" />
+        <meta name="post" content="each Post" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div
@@ -22,7 +36,6 @@ const EachPostSsr = ({ post }: { post: Post }) => {
           width: "100%",
           height: "100%",
           padding: "50px",
-          backgroundColor: "black",
         }}
       >
         <main>
@@ -32,10 +45,11 @@ const EachPostSsr = ({ post }: { post: Post }) => {
               flexDirection: "column",
               alignItems: "center",
               width: "100%",
-              color: "white",
             }}
           >
-            <h2 style={{ textAlign: "center" }}>{post.title}</h2>
+            <h2 style={{ textAlign: "center", color: "indigo" }}>
+              {post.title}
+            </h2>
             <br />
             <article style={{ width: "50%" }}>
               <p
@@ -43,6 +57,7 @@ const EachPostSsr = ({ post }: { post: Post }) => {
                   textAlign: "center",
                   fontSize: "17px",
                   lineHeight: "25px",
+                  color: "indigo",
                 }}
               >
                 {post.body}
@@ -51,9 +66,9 @@ const EachPostSsr = ({ post }: { post: Post }) => {
           </section>
         </main>
         <footer style={{ marginBottom: "50px" }}>
-          <Link href="/postlist/ssr" passHref>
+          <Link href="/postlist/csr" passHref>
             <button
-              className="ssr"
+              className="csr"
               style={{
                 width: "150px",
                 height: "30px",
@@ -67,19 +82,9 @@ const EachPostSsr = ({ post }: { post: Post }) => {
         </footer>
       </div>
     </div>
+  ) : (
+    <div>Loading...</div>
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({
-  query: { post_id },
-}): Promise<any> => {
-  const res = await fetch(`${POST_URL}/${post_id}`);
-  const post = await res.json();
-  return {
-    props: {
-      post,
-    },
-  };
-};
-
-export default EachPostSsr;
+export default EachPostCsr;

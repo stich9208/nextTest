@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
@@ -29,6 +29,11 @@ const Home: NextPage = () => {
         <Link href="/postlist/ssr">
           <a>
             <h1>SSR POSTS</h1>
+          </a>
+        </Link>
+        <Link href="/postlist/csr">
+          <a>
+            <h1>CSR POSTS</h1>
           </a>
         </Link>
       </main>

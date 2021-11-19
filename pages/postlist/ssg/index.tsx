@@ -29,21 +29,38 @@ const Posts = ({ posts }: { posts: any }) => {
         >
           Static Generation
         </span>
-        <Link href="/postlist/ssr" passHref>
-          <button
-            className="ssg"
-            style={{
-              marginRight: "20%",
-              width: "100px",
-              height: "40px",
-              fontWeight: "bold",
-              borderRadius: "20px",
-              cursor: "pointer",
-            }}
-          >
-            Go to SSR
-          </button>
-        </Link>
+        <div style={{ display: "flex", width: "400px" }}>
+          <Link href="/postlist/ssr" passHref>
+            <button
+              className="ssg"
+              style={{
+                marginRight: "20%",
+                width: "100px",
+                height: "40px",
+                fontWeight: "bold",
+                borderRadius: "20px",
+                cursor: "pointer",
+              }}
+            >
+              Go to SSR
+            </button>
+          </Link>
+          <Link href="/postlist/csr" passHref>
+            <button
+              className="ssg"
+              style={{
+                marginRight: "20%",
+                width: "100px",
+                height: "40px",
+                fontWeight: "bold",
+                borderRadius: "20px",
+                cursor: "pointer",
+              }}
+            >
+              Go to CSR
+            </button>
+          </Link>
+        </div>
       </header>
       <main>
         <ol>

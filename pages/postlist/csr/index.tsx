@@ -1,15 +1,24 @@
-import React from "react";
-import { GetServerSideProps } from "next";
+import React, { useEffect, useState } from "react";
+import { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import Post from "../../../src/interfaces/Post.interface";
+import { POST_URL } from "../../../config/util";
 
-const Ssr = ({ posts }: { posts: Post[] }) => {
+const Posts = () => {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    fetch(POST_URL)
+      .then((res) => res.json())
+      .then((res) => setPosts(res));
+  }, []);
+
   return (
-    <div style={{ paddingTop: "20px", backgroundColor: "black" }}>
+    <div style={{ paddingTop: "20px", backgroundColor: "lightyellow" }}>
       <Head>
         <title>postList</title>
-        <meta name="posts/ssr" content="all Posts" />
+        <meta name="posts/csr" content="all Posts" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header
@@ -18,7 +27,7 @@ const Ssr = ({ posts }: { posts: Post[] }) => {
           justifyContent: "space-between",
           alignItems: "center",
           marginBottom: "50px",
-          color: "white",
+          color: "indigo",
         }}
       >
         <span
@@ -28,12 +37,27 @@ const Ssr = ({ posts }: { posts: Post[] }) => {
             fontWeight: "bold",
           }}
         >
-          Server Side Rendering
+          Client Side Rendering
         </span>
         <div style={{ display: "flex", width: "400px" }}>
+          <Link href="/postlist/ssr" passHref>
+            <button
+              className="csr"
+              style={{
+                marginRight: "20%",
+                width: "100px",
+                height: "40px",
+                fontWeight: "bold",
+                borderRadius: "20px",
+                cursor: "pointer",
+              }}
+            >
+              Go to SSR
+            </button>
+          </Link>
           <Link href="/postlist/ssg" passHref>
             <button
-              className="ssr"
+              className="csr"
               style={{
                 marginRight: "20%",
                 width: "100px",
@@ -46,25 +70,10 @@ const Ssr = ({ posts }: { posts: Post[] }) => {
               Go to SSG
             </button>
           </Link>
-          <Link href="/postlist/csr" passHref>
-            <button
-              className="ssr"
-              style={{
-                marginRight: "20%",
-                width: "100px",
-                height: "40px",
-                fontWeight: "bold",
-                borderRadius: "20px",
-                cursor: "pointer",
-              }}
-            >
-              Go to CSR
-            </button>
-          </Link>
         </div>
       </header>
       <main>
-        <ol style={{ color: "white" }}>
+        <ol style={{ color: "indigo" }}>
           {posts.map((post: Post) => (
             <li
               key={post.id}
@@ -75,10 +84,8 @@ const Ssr = ({ posts }: { posts: Post[] }) => {
                 fontSize: "25px",
               }}
             >
-              <Link href={`/postlist/ssr/${post.id}`}>
-                <a style={{ color: "white", borderBottom: "1px solid white" }}>
-                  {post.title}
-                </a>
+              <Link href={`/postlist/csr/${post.id}`}>
+                <a style={{ borderBottom: "1px solid indigo" }}>{post.title}</a>
               </Link>
             </li>
           ))}
@@ -88,23 +95,4 @@ const Ssr = ({ posts }: { posts: Post[] }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps =
-  async (): Promise<any> => {
-    const res = await fetch("https://jsonplaceholder.typicode.com/posts");
-    const posts = await res.json();
-
-    if (!posts)
-      return {
-        redirect: {
-          destination: "/",
-          permanent: false,
-        },
-      };
-    return {
-      props: {
-        posts,
-      },
-    };
-  };
-
-export default Ssr;
+export default Posts;

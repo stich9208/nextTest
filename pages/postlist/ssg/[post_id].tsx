@@ -3,8 +3,9 @@ import { GetStaticProps, GetStaticPaths } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import Post from "../../../src/interfaces/Post.interface";
+import { POST_URL } from "../../../config/util";
 
-const EachPost = ({ post }: { post: any }) => {
+const EachPostSsg = ({ post }: { post: any }) => {
   return (
     <div style={{ height: "100vh" }}>
       <Head>
@@ -68,7 +69,7 @@ const EachPost = ({ post }: { post: any }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async (): Promise<any> => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+  const res = await fetch(POST_URL);
   const posts = await res.json();
   const paths = posts.map((post: Post) => ({
     params: {
@@ -81,12 +82,10 @@ export const getStaticPaths: GetStaticPaths = async (): Promise<any> => {
 export const getStaticProps: GetStaticProps = async ({
   params,
 }): Promise<any> => {
-  const res = await fetch(
-    `https://jsonplaceholder.typicode.com/posts/${params?.post_id}`
-  );
+  const res = await fetch(`${POST_URL}/${params?.post_id}`);
   const post = await res.json();
 
   return { props: { post } };
 };
 
-export default EachPost;
+export default EachPostSsg;
