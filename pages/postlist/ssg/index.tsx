@@ -29,7 +29,7 @@ const Posts = ({ posts }: { posts: any }) => {
         >
           Static Generation
         </span>
-        <div style={{ display: "flex", width: "400px" }}>
+        <div style={{ display: "flex", width: "800px" }}>
           <Link href="/postlist/ssr" passHref>
             <button
               className="ssg"
@@ -58,6 +58,21 @@ const Posts = ({ posts }: { posts: any }) => {
               }}
             >
               Go to CSR
+            </button>
+          </Link>
+          <Link href="/" passHref>
+            <button
+              className="ssg"
+              style={{
+                marginRight: "20%",
+                width: "100px",
+                height: "40px",
+                fontWeight: "bold",
+                borderRadius: "20px",
+                cursor: "pointer",
+              }}
+            >
+              HOME
             </button>
           </Link>
         </div>

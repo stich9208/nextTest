@@ -30,7 +30,7 @@ const Ssr = ({ posts }: { posts: Post[] }) => {
         >
           Server Side Rendering
         </span>
-        <div style={{ display: "flex", width: "400px" }}>
+        <div style={{ display: "flex", width: "800px" }}>
           <Link href="/postlist/ssg" passHref>
             <button
               className="ssr"
@@ -59,6 +59,21 @@ const Ssr = ({ posts }: { posts: Post[] }) => {
               }}
             >
               Go to CSR
+            </button>
+          </Link>
+          <Link href="/" passHref>
+            <button
+              className="ssr"
+              style={{
+                marginRight: "20%",
+                width: "100px",
+                height: "40px",
+                fontWeight: "bold",
+                borderRadius: "20px",
+                cursor: "pointer",
+              }}
+            >
+              HOME
             </button>
           </Link>
         </div>
