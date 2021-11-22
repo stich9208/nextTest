@@ -40,21 +40,6 @@ const Posts = () => {
           Client Side Rendering
         </span>
         <div style={{ display: "flex", width: "800px" }}>
-          <Link href="/postlist/ssr" passHref>
-            <button
-              className="csr"
-              style={{
-                marginRight: "20%",
-                width: "100px",
-                height: "40px",
-                fontWeight: "bold",
-                borderRadius: "20px",
-                cursor: "pointer",
-              }}
-            >
-              Go to SSR
-            </button>
-          </Link>
           <Link href="/postlist/ssg" passHref>
             <button
               className="csr"
@@ -70,6 +55,22 @@ const Posts = () => {
               Go to SSG
             </button>
           </Link>
+          <Link href="/postlist/ssr" passHref>
+            <button
+              className="csr"
+              style={{
+                marginRight: "20%",
+                width: "100px",
+                height: "40px",
+                fontWeight: "bold",
+                borderRadius: "20px",
+                cursor: "pointer",
+              }}
+            >
+              Go to SSR
+            </button>
+          </Link>
+
           <Link href="/" passHref>
             <button
               className="csr"
