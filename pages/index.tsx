@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import { IMAGE_URL } from "../config/util";
 
 const Home: NextPage = () => {
+  useEffect(() => {
+    const apiKey = process.env.NEXT_PUBLIC_CLIENT_ID;
+    fetch(`${IMAGE_URL}/random?client_id=${apiKey}`)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  });
   return (
     <div>
       <Head>

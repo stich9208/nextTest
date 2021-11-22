@@ -29,7 +29,16 @@ const Posts = ({ posts }: { posts: any }) => {
         >
           Static Generation
         </span>
-        <div style={{ display: "flex", width: "800px" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            position: "fixed",
+            right: 0,
+            paddingRight: "20px",
+            width: "800px",
+          }}
+        >
           <Link href="/postlist/ssr" passHref>
             <button
               className="ssg"
@@ -42,7 +51,7 @@ const Posts = ({ posts }: { posts: any }) => {
                 cursor: "pointer",
               }}
             >
-              Go to SSR
+              GO TO SSR
             </button>
           </Link>
           <Link href="/postlist/csr" passHref>
@@ -57,14 +66,13 @@ const Posts = ({ posts }: { posts: any }) => {
                 cursor: "pointer",
               }}
             >
-              Go to CSR
+              GO TO CSR
             </button>
           </Link>
           <Link href="/" passHref>
             <button
               className="ssg"
               style={{
-                marginRight: "20%",
                 width: "100px",
                 height: "40px",
                 fontWeight: "bold",
