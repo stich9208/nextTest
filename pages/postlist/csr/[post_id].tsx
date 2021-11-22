@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { GetStaticProps, GetStaticPaths } from "next";
 import Head from "next/head";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import Post from "../../../src/interfaces/Post.interface";
 import { POST_URL } from "../../../config/util";
 
 const EachPostCsr = () => {
+  const router = useRouter();
   const [post, setPost] = useState<Post>();
 
   const {
     query: { post_id },
-  } = useRouter();
+  } = router;
 
   useEffect(() => {
     fetch(`${POST_URL}/${post_id}`)
@@ -66,19 +65,18 @@ const EachPostCsr = () => {
           </section>
         </main>
         <footer style={{ marginBottom: "50px" }}>
-          <Link href="/postlist/csr" passHref>
-            <button
-              className="csr"
-              style={{
-                width: "150px",
-                height: "30px",
-                fontWeight: "bold",
-                borderRadius: "40px",
-              }}
-            >
-              GO BACK TO LIST
-            </button>
-          </Link>
+          <button
+            className="csr"
+            style={{
+              width: "150px",
+              height: "30px",
+              fontWeight: "bold",
+              borderRadius: "40px",
+            }}
+            onClick={() => router.back()}
+          >
+            GO BACK TO LIST
+          </button>
         </footer>
       </div>
     </div>

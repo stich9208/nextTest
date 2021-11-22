@@ -2,10 +2,12 @@ import React from "react";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import Post from "../../../src/interfaces/Post.interface";
 import { POST_URL } from "../../../config/util";
 
 const EachPostSsr = ({ post }: { post: Post }) => {
+  const router = useRouter();
   return (
     <div style={{ height: "100vh" }}>
       <Head>
@@ -51,19 +53,18 @@ const EachPostSsr = ({ post }: { post: Post }) => {
           </section>
         </main>
         <footer style={{ marginBottom: "50px" }}>
-          <Link href="/postlist/ssr" passHref>
-            <button
-              className="ssr"
-              style={{
-                width: "150px",
-                height: "30px",
-                fontWeight: "bold",
-                borderRadius: "40px",
-              }}
-            >
-              GO BACK TO LIST
-            </button>
-          </Link>
+          <button
+            className="ssr"
+            style={{
+              width: "150px",
+              height: "30px",
+              fontWeight: "bold",
+              borderRadius: "40px",
+            }}
+            onClick={() => router.back()}
+          >
+            GO BACK TO LIST
+          </button>
         </footer>
       </div>
     </div>

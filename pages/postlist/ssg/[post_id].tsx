@@ -1,11 +1,12 @@
 import React from "react";
 import { GetStaticProps, GetStaticPaths } from "next";
 import Head from "next/head";
-import Link from "next/link";
+import { useRouter } from "next/router";
 import Post from "../../../src/interfaces/Post.interface";
 import { POST_URL } from "../../../config/util";
 
 const EachPostSsg = ({ post }: { post: any }) => {
+  const router = useRouter();
   return (
     <div style={{ height: "100vh" }}>
       <Head>
@@ -49,19 +50,18 @@ const EachPostSsg = ({ post }: { post: any }) => {
           </section>
         </main>
         <footer style={{ marginBottom: "50px" }}>
-          <Link href="/postlist/ssg" passHref>
-            <button
-              className="ssg"
-              style={{
-                width: "150px",
-                height: "30px",
-                fontWeight: "bold",
-                borderRadius: "40px",
-              }}
-            >
-              GO BACK TO LIST
-            </button>
-          </Link>
+          <button
+            className="ssg"
+            style={{
+              width: "150px",
+              height: "30px",
+              fontWeight: "bold",
+              borderRadius: "40px",
+            }}
+            onClick={() => router.back()}
+          >
+            GO BACK TO LIST
+          </button>
         </footer>
       </div>
     </div>
