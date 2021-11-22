@@ -6,7 +6,7 @@ import { IMAGE_URL } from "../config/util";
 
 const Home: NextPage = () => {
   useEffect(() => {
-    const apiKey = process.env.NEXT_PUBLIC_CLIENT_ID;
+    const apiKey = process.env.CLIENT_ID;
     fetch(`${IMAGE_URL}/random?client_id=${apiKey}`)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
